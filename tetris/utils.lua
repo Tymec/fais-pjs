@@ -65,30 +65,36 @@ function coords_to_index(x, y, cols)
     return (y - 1) * cols + x
 end
 
-function flip_table(table)
-    local result = {}
-    for i = 1, #table do
-        for j = 1, #table[i] do
-            if not result[j] then
-                result[j] = {}
-            end
-            table.insert(result[j], table[i][j])
-        end
+function transpose_table(m)
+    local rotated = {}
+    for c, m_1_c in ipairs(m[1]) do
+       local col = {m_1_c}
+       for r = 2, #m do
+          col[r] = m[r][c]
+       end
+       table.insert(rotated, col)
     end
-    return result
+    return rotated
 end
 
-function transpose_table(table)
-    local result = {}
-    for i = 1, #table do
-        for j = 1, #table[i] do
-            if not result[j] then
-                result[j] = {}
-            end
-            table.insert(result[j], table[i][j])
-        end
+function rotate_270(m)
+    local rotated = {}
+    for c, m_1_c in ipairs(m[1]) do
+       local col = {m_1_c}
+       for r = 2, #m do
+          col[r] = m[r][c]
+       end
+       table.insert(rotated, 1, col)
     end
-    return result
+    return rotated
+end
+
+function rotate_180(m)
+    return rotate_270(rotate_270(m))
+end
+ 
+ function rotate_90(m)
+    return rotate_270(rotate_270(rotate_270(m)))
 end
 
 function rgb_to_hsv(r, g, b)

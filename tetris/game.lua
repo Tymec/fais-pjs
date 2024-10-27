@@ -137,7 +137,6 @@ game.on_update = function (dt)
         game.delta = 0
         
         game.apply_gravity()
-        game.remove_lines()
 
         if not game.has_active_piece then
             if not game.spawn_piece(game.next_piece) then
@@ -240,6 +239,8 @@ game.apply_gravity = function ()
             game.board[x][y] = {active = false, color = game.PieceColors[game.current_piece]}
         end
 
+        game.remove_lines()
+
         game.has_active_piece = false
     end
 end
@@ -282,9 +283,76 @@ game.rotate = function ()
 
     local piece = game.Pieces[game.current_piece]
     local rotation = (game.piece_rotation + 1) % 4
-    
-    -- TODO: rotate the piece
 
+    -- create a copy of the piece
+    local new_piece = {}
+    for i = 1, #piece do
+        new_piece[i] = {}
+        for j = 1, #piece[i] do
+            new_piece[i][j] = piece[i][j]
+        end
+    end
+    
+    -- rotate the piece
+    if rotation == 1 then
+        new_piece = rotate_90(new_piece)
+    elseif rotation == 2 then
+        new_piece = rotate_180(new_piece)
+    elseif rotation == 3 then
+        new_piece = rotate_270(new_piece)
+    end
+
+    -- get the new piece position
+    local xp = math.huge
+    local yp = math.huge
+    for i = 1, #game.piece do
+        local x, y = index_to_coords(game.piece[i], game.cols)
+        xp = math.min(xp, x)
+        yp = math.min(yp, y)
+    end
+
+    -- check if the piece can be placed in the new position
+    for i = 1, #new_piece do
+        for j = 1, #new_piece[i] do
+            if new_piece[i][j] == 1 then
+                local x = xp + j - 1
+                local y = yp + i - 1
+
+                -- out of bounds
+                if x < 1 or x > game.cols or y < 1 or y > game.rows then
+                    return false
+                end
+
+                -- check if the cell is occupied
+                local cell = game.board[x][y]
+                if cell ~= 0 and not cell.active then
+                    return false
+                end
+            end
+        end
+    end
+
+    -- remove the old piece from the board
+    for i = 1, #game.piece do
+        local x, y = index_to_coords(game.piece[i], game.cols)
+        game.board[x][y] = 0
+    end
+    
+    -- place the new piece on the board
+    local indices = {}
+    for i = 1, #new_piece do
+        for j = 1, #new_piece[i] do
+            if new_piece[i][j] == 1 then
+                local x = xp + j - 1
+                local y = yp + i - 1
+                game.board[x][y] = {active = true, color = game.PieceColors[game.current_piece]}
+                table.insert(indices, coords_to_index(x, y, game.cols))
+            end
+        end
+    end
+
+    game.piece = indices
+    game.piece_rotation = rotation
     return true
 end
 
