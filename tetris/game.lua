@@ -135,7 +135,7 @@ game.on_update = function (dt)
 
     if game.delta > game.time_step then
         game.delta = 0
-        
+
         game.apply_gravity()
 
         if not game.has_active_piece then
@@ -245,7 +245,27 @@ game.apply_gravity = function ()
     end
 end
 
+game.calculate_score = function (lines_cleared)
+    local total = 0 
+
+    if lines_cleared == 1 then
+        total = 40
+    elseif lines_cleared == 2 then
+        total = 100
+    elseif lines_cleared == 3 then
+        total = 300
+    elseif lines_cleared == 4 then
+        total = 1200
+    else
+        total = 1200 + game.calculate_score(lines_cleared - 4)
+    end
+
+    return total
+end
+
 game.remove_lines = function ()
+    local lines_cleared = 0
+
     -- go through each row and check if it's full
     for j = 1, game.rows do
         local full = true
@@ -258,7 +278,7 @@ game.remove_lines = function ()
 
         -- if the row is full, remove it
         if full then
-            game.score = game.score + 1 -- TODO: proper scoring
+            lines_cleared = lines_cleared + 1
             for i = 1, game.cols do
                 -- TODO: add line clear animation
                 -- TODO: add sound effect
@@ -272,7 +292,13 @@ game.remove_lines = function ()
                 end
             end
         end
-    end 
+    end
+
+    -- update the score
+    if lines_cleared > 0 then
+        game.score = game.score + game.calculate_score(lines_cleared)
+        animator.shake_screen()
+    end
 end
 
 game.rotate = function ()

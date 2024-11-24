@@ -1,5 +1,6 @@
 require 'constants'
 require 'utils'
+require 'animator'
 require 'game'
 require 'menu'
 require 'ui'
@@ -22,6 +23,7 @@ function love.load()
     menu.on_load()
     game.on_load()
     ui.on_load()
+    animator.on_load()
 end
 
 function love.keypressed(key, unicode)
@@ -64,6 +66,7 @@ end
 function love.update(dt)
     if is_playing then
         game.on_update(dt)
+        animator.on_update(dt)
     else
         menu.on_update(dt)
     end
@@ -71,6 +74,7 @@ end
 
 function love.draw()
     if is_playing then
+        animator.on_draw()
         game.on_draw()
         ui.on_draw()
     else
