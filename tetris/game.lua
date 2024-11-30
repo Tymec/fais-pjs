@@ -160,7 +160,7 @@ game.on_touchreleased = function (x, y)
             game.lock_delta = GAME_LOCK_DELAY + 1
             game.delta = game.time_step
         else
-            game.rotate()
+            game.swap()
         end
     else
         game.rotate()
