@@ -36,7 +36,7 @@
                 android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation"
                 android:label="Tetris"
                 android:launchMode="singleInstance"
-                android:screenOrientation="landscape"
+                android:screenOrientation="portrait"
                 android:resizeableActivity="false"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
