@@ -147,23 +147,22 @@ game.on_touchreleased = function (x, y)
     local dx = x - game.touch_x
     local dy = y - game.touch_y
 
-    if dx > 10 then
-        -- swipe right: move the piece to the right
-        game.move(1, 0)
-    elseif dx < 10 then
-        -- swipe left: move the piece to the left
-        game.move(-1, 0)
-    elseif dy > 10 then
-        -- swipe down: slam
-        while game.move(0, 1) do
+    if math.abs(dx) > TOUCH_TOLERANCE then
+        if dx > 0 then
+            game.move(1, 0)
+        else
+            game.move(-1, 0)
         end
-        game.lock_delta = GAME_LOCK_DELAY + 1
-        game.delta = game.time_step
-    elseif dy < 10 then
-        -- swipe up: swap
-        game.swap()
+    elseif math.abs(dy) > TOUCH_TOLERANCE then
+        if dy > 0 then
+            while game.move(0, 1) do
+            end
+            game.lock_delta = GAME_LOCK_DELAY + 1
+            game.delta = game.time_step
+        else
+            game.rotate()
+        end
     else
-        -- simple touch: rotate
         game.rotate()
     end
 

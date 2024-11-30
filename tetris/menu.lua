@@ -2,9 +2,9 @@
 menu = {}
 
 menu.on_load = function ()
-    menu.title_font = love.graphics.newFont(FONT_PATH, 144)
-    menu.title_outline_font = love.graphics.newFont(FONT_PATH, 148)
-    menu.normal_font = love.graphics.newFont(FONT_PATH, 36)
+    menu.title_font = love.graphics.newFont(FONT_PATH, MENU_TITLE_FONT_SIZE)
+    menu.title_outline_font = love.graphics.newFont(FONT_PATH, MENU_TITLE_OUTLINE_FONT_SIZE)
+    menu.normal_font = love.graphics.newFont(FONT_PATH, MENU_NORMAL_FONT_SIZE)
     menu.title_color = {0.68, 0.85, 0.88}
 
     menu.highscore = get_highscore()

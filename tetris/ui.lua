@@ -2,9 +2,8 @@
 ui = {}
 
 ui.on_load = function ()
-    ui.large_font = love.graphics.newFont(FONT_PATH, 72)
-    ui.normal_font = love.graphics.newFont(FONT_PATH, 24)
-
+    ui.large_font = love.graphics.newFont(FONT_PATH, UI_LARGE_FONT_SIZE)
+    ui.normal_font = love.graphics.newFont(FONT_PATH, UI_NORMAL_FONT_SIZE)
 
     ui.x = game.cols * BLOCK_SIZE + BLOCK_SIZE * 2
     ui.y = BLOCK_SIZE
