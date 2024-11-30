@@ -62,6 +62,8 @@ game.on_load = function ()
     game.has_swapped = false
     game.piece = {}
     game.piece_rotation = 0
+    game.touch_x = 0
+    game.touch_y = 0
 
     game.cols = math.floor(window_width / BLOCK_SIZE) - BOARD_PADDING.x
     game.rows = math.floor(window_height / BLOCK_SIZE) - BOARD_PADDING.y
@@ -124,6 +126,50 @@ game.on_keyreleased = function (key)
     if key == 'down' or key == 's' then
         game.time_step = GAME_TIME_STEP
     end
+end
+
+game.on_touchpressed = function (x, y)
+    if game.game_over then
+        game.on_load()
+        game.game_over = false
+        return
+    end
+
+    game.touch_x = x
+    game.touch_y = y
+end
+
+game.on_touchreleased = function (x, y)
+    if game.game_over then
+        return
+    end
+
+    local dx = x - game.touch_x
+    local dy = y - game.touch_y
+
+    if dx > 10 then
+        -- swipe right: move the piece to the right
+        game.move(1, 0)
+    elseif dx < 10 then
+        -- swipe left: move the piece to the left
+        game.move(-1, 0)
+    elseif dy > 10 then
+        -- swipe down: slam
+        while game.move(0, 1) do
+        end
+        game.lock_delta = GAME_LOCK_DELAY + 1
+        game.delta = game.time_step
+    elseif dy < 10 then
+        -- swipe up: swap
+        game.swap()
+    else
+        -- simple touch: rotate
+        game.rotate()
+    end
+
+    -- reset touch coordinates
+    game.touch_x = 0
+    game.touch_y = 0
 end
 
 game.on_update = function (dt)

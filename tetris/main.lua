@@ -63,6 +63,28 @@ function love.mousereleased(x, y, button, istouch, presses)
     end
 end
 
+function love.touchmoved(id, x, y, dx, dy, pressure)
+    if not is_playing then
+        menu.on_touchmoved(x, y)
+    end
+end
+
+function love.touchpressed(id, x, y, dx, dy, pressure)
+    if is_playing then
+        game.on_touchpressed(x, y)
+    else
+        menu.on_touchpressed(x, y)
+    end
+end
+
+function love.touchreleased(id, x, y, dx, dy, pressure)
+    if is_playing then
+        game.on_touchreleased(x, y)
+    else
+        menu.on_touchreleased(x, y)
+    end
+end
+
 function love.update(dt)
     if is_playing then
         game.on_update(dt)

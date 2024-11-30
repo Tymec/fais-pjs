@@ -94,6 +94,24 @@ menu.on_mousereleased = function (x, y)
     end
 end
 
+menu.on_touchmoved = function (x, y)
+    menu.cursor.x = x
+    menu.cursor.y = y
+    menu.cursor.override = false
+end
+
+menu.on_touchpressed = function (x, y)
+    menu.cursor.pressed = true
+end
+
+menu.on_touchreleased = function (x, y)
+    menu.cursor.pressed = false
+    local button = menu.get_button_at(x, y)
+    if button and button.enabled() then
+        button.action()
+    end
+end
+
 
 --- Callbacks
 
