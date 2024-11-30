@@ -19,6 +19,7 @@ build/tetris.exe:
 	rm build/Tetris.love
 
 build/tetris.apk:
+	@rm -rf build/love_game
 	@mkdir -p build
 	apktool d -s -o build/love_game lib/love-11.5-android-embed.apk
 	@mkdir -p build/love_game/assets
