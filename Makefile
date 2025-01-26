@@ -12,6 +12,12 @@ tictactoe:
 tetris:
 	@love.exe tetris
 
+crawler:
+	@ruby crawler/main.rb
+
+chatbot:
+	@cd chatbot && poetry run python -m app
+
 build/tetris.exe:
 	@mkdir -p build
 	cd tetris && zip -9 -r ../build/Tetris.love .
@@ -29,4 +35,4 @@ build/tetris.apk:
 	uberapk --apks build/Tetris.apk --overwrite
 	rm -rf build/love_game
 
-.PHONY: default clean tetris build/tetris.exe build/tetris.apk
+.PHONY: default clean tetris crawler chatbot build/tetris.exe build/tetris.apk

@@ -1,2 +1,5 @@
 build/
 lib/
+*.db
+.venv/
+__pycache__/
