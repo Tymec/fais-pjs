@@ -1,0 +1,29 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
+    bigdecimal (3.1.8)
+    http-2 (1.0.2)
+    httpx (1.4.0)
+      http-2 (>= 1.0.0)
+    nokogiri (1.18.1-x86_64-linux-gnu)
+      racc (~> 1.4)
+    public_suffix (6.0.1)
+    racc (1.8.1)
+    sequel (5.88.0)
+      bigdecimal
+    sqlite3 (2.5.0-x86_64-linux-gnu)
+
+PLATFORMS
+  x86_64-linux-gnu
+
+DEPENDENCIES
+  addressable (~> 2.8)
+  httpx (~> 1.4)
+  nokogiri (~> 1.18)
+  sequel (~> 5.88)
+  sqlite3 (~> 2.5)
+
+BUNDLED WITH
+   2.6.3
