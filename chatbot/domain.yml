@@ -1,0 +1,67 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - place_order
+  - choose_pickup
+  - choose_delivery
+  - opening_hours
+  - list_menu
+  - inform_address
+  - telegram_start
+
+actions:
+  - action_place_order
+  - action_choose_pickup
+  - action_choose_delivery
+  - action_opening_hours
+  - action_list_menu
+
+entities:
+  - order_item
+  - address_text
+
+slots:
+  order:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: order_item
+
+  address:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: address_text
+
+responses:
+  utter_greet:
+    - text: "Hello! Welcome to our restaurant. How can I help you today?"
+
+  utter_goodbye:
+    - text: "Goodbye! Hope to see you soon."
+
+  utter_default:
+    - text: "I'm sorry, I didn't understand that."
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_ask_delivery_or_pickup:
+    - text: "Would you like to pick up your order or have it delivered?"
+
+  utter_ask_address:
+    - text: "Please provide your address."
+
+  utter_telegram_start:
+    - text: "Restaurant Bot: Order food from our restaurant."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

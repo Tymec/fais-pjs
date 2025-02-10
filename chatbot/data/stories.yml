@@ -1,0 +1,71 @@
+version: "3.1"
+
+stories:
+- story: Place order with pick-up
+  steps:
+    - intent: telegram_start
+    - action: utter_telegram_start
+    - intent: greet
+    - action: utter_greet
+    - intent: place_order
+      entities:
+        - order_item: "tiramisu"
+    - slot_was_set:
+      - order: "tiramisu"
+    - action: action_place_order
+    - action: utter_ask_delivery_or_pickup
+    - intent: choose_pickup
+    - action: action_choose_pickup
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Place order with delivery
+  steps:
+    - intent: telegram_start
+    - action: utter_telegram_start
+    - intent: greet
+    - action: utter_greet
+    - intent: place_order
+      entities:
+        - order_item: "hot-dog"
+    - slot_was_set:
+      - order: "hot-dog"
+    - action: action_place_order
+    - action: utter_ask_delivery_or_pickup
+    - intent: choose_delivery
+    - action: utter_ask_address
+    - intent: inform_address
+      entities:
+        - address_text: "123 Main Street"
+    - slot_was_set:
+      - address: "123 Main Street"
+    - action: action_choose_delivery
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: Ask for opening hours
+  steps:
+    - intent: telegram_start
+    - action: utter_telegram_start
+    - intent: opening_hours
+    - action: action_opening_hours
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: List menu and order
+  steps:
+    - intent: telegram_start
+    - action: utter_telegram_start
+    - intent: list_menu
+    - action: action_list_menu
+    - intent: place_order
+      entities:
+        - order_item: "pizza"
+    - slot_was_set:
+        - order: "pizza"
+    - action: action_place_order
+    - action: utter_ask_delivery_or_pickup
+    - intent: choose_pickup
+    - action: action_choose_pickup
+    - intent: goodbye
+    - action: utter_goodbye

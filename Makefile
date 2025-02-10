@@ -16,7 +16,8 @@ crawler:
 	@ruby crawler/main.rb
 
 chatbot:
-	@cd chatbot && poetry run python -m app
+    @$(ngrok http --url=smart-expert-moose.ngrok-free.app 5005)
+	@cd chatbot && poetry run rasa run --enable-api --cors "*"
 
 build/tetris.exe:
 	@mkdir -p build

@@ -1,0 +1,128 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: place_order
+  examples: |
+    - order [fries](order_item)
+    - i want to order [pizza](order_item)
+    - i would like to order [sushi](order_item)
+    - i'd like to get [ramen](order_item)
+    - can you add [burger](order_item) to my order
+    - could i get [tacos](order_item)
+    - i want [tiramisu](order_item)
+    - give me [cake](order_item)
+    - [ice cream](order_item)
+
+- intent: choose_pickup
+  examples: |
+    - pickup
+    - pick up
+    - i will pick it up
+    - i can come get it
+
+- intent: choose_delivery
+  examples: |
+    - delivery
+    - deliver
+    - i want it delivered
+    - i need it delivered
+    - bring it to me
+    - i want it brought to me
+
+- intent: opening_hours
+  examples: |
+    - when do you open
+    - what are your hours
+    - hours of operation
+    - working hours
+    - hours
+    - open today
+    - hours of operation today
+    - when do you open today
+    - what are your hours today
+    - working hours today
+    - hours today
+    - open today
+
+- intent: list_menu
+  examples: |
+    - what do you have
+    - what are you serving
+    - what is on the menu
+    - what do you offer
+    - what are you selling
+    - what is on the menu
+    - what do you have for sale
+    - what are you serving today
+    - what is on the menu today
+    - what do you offer today
+    - what are you selling today
+    - what is on the menu today
+    - what do you have for sale today
+
+- intent: inform_address
+  examples: |
+    - [123 Main Street](address_text)
+    - i live at [456 Elm Street](address_text)
+    - my address is [789 Pine Street](address_text)
+    - deliver to [987 Oak Street](address_text)
+    - send it to [654 Birch Street](address_text)
+
+- intent: telegram_start
+  examples: |
+    - start

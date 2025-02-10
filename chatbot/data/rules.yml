@@ -1,0 +1,49 @@
+version: "3.1"
+
+rules:
+- rule: Greet the user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Opening hours
+  steps:
+  - intent: opening_hours
+  - action: action_opening_hours
+
+- rule: List menu
+  steps:
+  - intent: list_menu
+  - action: action_list_menu
+
+- rule: Choose delivery
+  steps:
+  - action: utter_ask_delivery_or_pickup
+  - intent: choose_delivery
+  - action: utter_ask_address
+
+- rule: Provide address
+  steps:
+  - intent: inform_address
+  - action: action_choose_delivery
+
+- rule: Choose pickup
+  steps:
+    - action: utter_ask_delivery_or_pickup
+    - intent: choose_pickup
+    - action: action_choose_pickup
+
+- rule: Telegram start
+  steps:
+  - intent: telegram_start
+  - action: utter_telegram_start

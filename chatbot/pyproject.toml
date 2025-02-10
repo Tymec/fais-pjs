@@ -2,18 +2,22 @@
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.11"
+rasa = "^3.6.21"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.3"
+
+[tool.poetry.plugins.dotenv]
+ignore = "false"
+location = ".env.local"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-extend-include = ["*.ipynb"]
-src = ["app"]
+src = ["actions"]
 line-length = 120
 indent-width = 4
 

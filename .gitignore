@@ -1,5 +1,8 @@
 build/
-lib/
 *.db
 .venv/
 __pycache__/
+node_modules/
+.env.local
+dist/
+chatbot/.rasa/cache
