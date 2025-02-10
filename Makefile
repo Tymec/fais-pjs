@@ -16,7 +16,7 @@ crawler:
 	@ruby crawler/main.rb
 
 chatbot:
-    @$(ngrok http --url=smart-expert-moose.ngrok-free.app 5005)
+    @$(ngrok http --url=$DOMAIN_NAME 5005)
 	@cd chatbot && poetry run rasa run --enable-api --cors "*"
 
 build/tetris.exe:
